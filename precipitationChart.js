@@ -1,6 +1,3 @@
-let precipitationDatastore;
-let impactDatastore;
-
 function getChartHeightAndWidth(dimensions) {
   return {
     height:
@@ -11,7 +8,7 @@ function getChartHeightAndWidth(dimensions) {
 
 function getPrecipationChartConfig() {
   const dimensions = {
-    width: 800,
+    width: $('#precipitationChart').width(),
     height: 800,
     margin: {
       top: 10,
@@ -43,7 +40,6 @@ function getDateFromString(str) {
 }
 
 function getPrecipitationChartScales(config) {
-  //   const xDomain = getXValues();
   const xScale = d3
     .scaleTime()
     .range([0, config.chartDimensions.width])
@@ -110,13 +106,6 @@ function drawLine(config, scales) {
     .attr("fill", "none");
 }
 
-function renderPrecipitationData() {
-  const config = getPrecipationChartConfig();
-  const scales = getPrecipitationChartScales(config);
-  drawAxes(config, scales);
-  drawLine(config, scales);
-}
-
 function preprocessData() {
   precipitationDatastore = precipitationDatastore.map(p => {
     return {
@@ -126,21 +115,10 @@ function preprocessData() {
   });
 }
 
-async function loadData() {
-  impactDatastore = await d3.csv(
-    "datasets/c2s_developer_exercise/SentinelCombo_20180516_20180612_Impact_Estimates.csv"
-  );
-  precipitationDatastore = await d3.csv(
-    "datasets/c2s_developer_exercise/Sri-Lanka_GSMaP_20180516_20180612.csv"
-  );
+function renderPrecipitationData() {
+  preprocessData();
+  const config = getPrecipationChartConfig();
+  const scales = getPrecipitationChartScales(config);
+  drawAxes(config, scales);
+  drawLine(config, scales);
 }
-
-(function() {
-  loadData()
-    .then(() => {
-      return preprocessData();
-    })
-    .then(() => {
-      renderPrecipitationData();
-    });
-})();
