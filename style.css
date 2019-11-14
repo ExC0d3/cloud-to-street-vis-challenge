@@ -31,3 +31,7 @@ map-layer {
 #hospitalMap {
   height: 580px;
 }
+
+#floodMap {
+  height: 580px;
+}
