@@ -10,6 +10,7 @@ async function loadData() {
 (function(){
     loadData()
     .then(() => {
+        $('#hospitalMapCheckbox').on('click', (e) => toggleFloodLayerOnHospitalMap(e))
         renderPrecipitationData();
         renderHospitalChart();
         renderFloodMap();

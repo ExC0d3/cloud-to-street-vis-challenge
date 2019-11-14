@@ -27,7 +27,7 @@
     <script src="precipitationChart.js"></script>
     <script src="hospitalChart.js"></script>
     <script src="floodChart.js"></script>
-    
+
     <link rel="stylesheet" href="style.css" />
 
     <link
@@ -47,25 +47,46 @@
     <div class="container">
       <div class="row">
         <div class="col-12">
+          <h3 class="p-2">Precipitation in Sri Lanka from May 2018 - June 2018</h3>
+        </div>
+        <div class="col-12">
           <div>
             <svg id="precipitationChart"></svg>
           </div>
         </div>
       </div>
       <div class="row mt-5">
-        <div class="col-12">
-          <div id="hospitalMap">
-            
+          <div class="col-12">
+              <h3 class="p-2">Hospital locations in Sri Lanka</h3>
+            </div>
+        <div class="col-12 mb-2">
+          <div>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  <input
+                    id="hospitalMapCheckbox"
+                    type="checkbox"
+                    aria-label="Radio button for following text input"
+                  />
+                  <p class="m-0  pl-2">Overlay flood map</p>
+                </div>
+              </div>
+            </div>
           </div>
+        </div>
+        <div class="col-12">
+          <div id="hospitalMap"></div>
         </div>
       </div>
       <div class="row mt-5">
           <div class="col-12">
-            <div id="floodMap">
-              
+              <h3 class="p-2">Flood map</h3>
             </div>
-          </div>
+        <div class="col-12">
+          <div id="floodMap"></div>
         </div>
+      </div>
     </div>
   </body>
   <script src="index.js"></script>
