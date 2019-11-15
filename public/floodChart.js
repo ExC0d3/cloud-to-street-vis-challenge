@@ -20,24 +20,6 @@ const drawFloodMap = floodMap => {
   return floodLayer;
 };
 
-function getColor(d) {
-  return d > 1000
-    ? "#800026"
-    : d > 500
-    ? "#BD0026"
-    : d > 200
-    ? "#E31A1C"
-    : d > 100
-    ? "#FC4E2A"
-    : d > 50
-    ? "#FD8D3C"
-    : d > 20
-    ? "#FEB24C"
-    : d > 10
-    ? "#FED976"
-    : "#FFEDA0";
-}
-
 const calculateImpactDays = () => {
   const began = new Date(impactDatastore[0].Began);
   const ended = new Date(impactDatastore[0].Ended);
@@ -53,9 +35,7 @@ const addLegend = floodMap => {
     const div = L.DomUtil.create("div", "info legend"),
       grades = [0, 10, 20, 50, 100, 200],
       colors = ['#f1eef6','#d0d1e6','#a6bddb','#74a9cf','#2b8cbe','#045a8d'];
-    // loop through our density intervals and generate a label with a colored square for each interval
     
-    // const wrapped_div = $(div).append($("div"));
     for (let i = 0; i < grades.length; i++) {
       div.innerHTML +=
         '<i style="background:' +

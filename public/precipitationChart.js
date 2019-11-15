@@ -10,7 +10,7 @@ function addAxisLabels(config) {
   const { container, dimensions } = config;
   container
     .append("text")
-    .attr("text-anchor", "middle") // this makes it easy to centre the text as the transform is applied to the anchor
+    .attr("text-anchor", "middle")
     .attr(
       "transform",
       "translate(" +
@@ -18,12 +18,12 @@ function addAxisLabels(config) {
         "," +
         dimensions.height / 2 +
         ")rotate(-90)"
-    ) // text is drawn off the screen top left, move down and out and rotate
+    )
     .text("Precipitation(mm)");
 
   container
     .append("text")
-    .attr("text-anchor", "middle") // this makes it easy to centre the text as the transform is applied to the anchor
+    .attr("text-anchor", "middle")
     .attr(
       "transform",
       "translate(" +
@@ -31,7 +31,7 @@ function addAxisLabels(config) {
         "," +
         (dimensions.height - dimensions.margin.bottom / 3) +
         ")"
-    ) // centre below axis
+    )
     .text("Date");
 }
 
@@ -179,7 +179,6 @@ function renderPrecipitationData() {
   const config = getPrecipationChartConfig();
   const scales = getPrecipitationChartScales(config);
   drawAxes(config, scales);
-  // drawLine(config, scales);
   drawBar(config, scales);
   addAxisLabels(config);
 }

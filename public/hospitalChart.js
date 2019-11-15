@@ -42,8 +42,6 @@ const toggleFloodLayerOnHospitalMap = e => {
     floodLayer = drawFloodMap(hospitalMap);
     addGeoLayer(hospitalMap, hospitalDatatstore.features, geojsonMarkerOptions);
   } else {
-    // hospitalMap.removeLayer(floodLayer);
-
     hospitalMap.eachLayer(function(layer) {
       hospitalMap.removeLayer(layer);
     });
