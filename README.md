@@ -7,3 +7,6 @@
 - `npm install`
 - `npm start`
 - Go to localhost:8000
+
+
+#### Link to visualization - https://fast-oasis-68188.herokuapp.com/
