@@ -6,14 +6,43 @@ function getChartHeightAndWidth(dimensions) {
   };
 }
 
+function addAxisLabels(config) {
+  const { container, dimensions } = config;
+  container
+    .append("text")
+    .attr("text-anchor", "middle") // this makes it easy to centre the text as the transform is applied to the anchor
+    .attr(
+      "transform",
+      "translate(" +
+        dimensions.margin.bottom / 2 +
+        "," +
+        dimensions.height / 2 +
+        ")rotate(-90)"
+    ) // text is drawn off the screen top left, move down and out and rotate
+    .text("Precipitation(mm)");
+
+  container
+    .append("text")
+    .attr("text-anchor", "middle") // this makes it easy to centre the text as the transform is applied to the anchor
+    .attr(
+      "transform",
+      "translate(" +
+        dimensions.width / 2 +
+        "," +
+        (dimensions.height - dimensions.margin.bottom / 3) +
+        ")"
+    ) // centre below axis
+    .text("Date");
+}
+
 function getPrecipationChartConfig() {
   const dimensions = {
-    width: $('#precipitationChart').width(),
+    width: $("#precipitationChart").width(),
     height: 800,
     margin: {
       top: 10,
       bottom: 50,
-      left: 30,
+      left: 50,
       right: 10
     }
   };
@@ -41,14 +70,15 @@ function getDateFromString(str) {
 
 function getPrecipitationChartScales(config) {
   const xScale = d3
-    .scaleTime()
+    .scaleBand()
     .range([0, config.chartDimensions.width])
-    .domain(d3.extent(precipitationDatastore, (p) => p.date));
-    
+    .padding(0.5)
+    .domain(precipitationDatastore.map(p => p.date));
+
   const yScale = d3
     .scaleLinear()
-    .range([config.chartDimensions.height,0])
-    .domain([0, d3.max(precipitationDatastore.map((p) => p.precip))]);
+    .range([config.chartDimensions.height, 0])
+    .domain([0, d3.max(precipitationDatastore.map(p => p.precip))]);
 
   return { xScale, yScale };
 }
@@ -59,9 +89,10 @@ function drawAxes(config, scales) {
   const { container } = config;
 
   const axisX = d3
-  .axisBottom(xScale)
-  .ticks(15)
-  .tickFormat(d3.timeFormat("%b-%d"))
+    .axisBottom(xScale)
+    .tickValues(xScale.domain().filter((d, idx) => idx % 2 === 0))
+    .tickSize(0)
+    .tickFormat(d3.timeFormat("%b-%d"));
 
   container
     .append("g")
@@ -83,27 +114,55 @@ function drawAxes(config, scales) {
     .call(axisY);
 }
 
-function drawLine(config, scales) {
+function drawBar(config, scales) {
   const { container } = config;
   const { xScale, yScale } = scales;
-  
-  container
-    .append("path")
-    .datum(precipitationDatastore)
-    .attr("d", 
-        d3.line()
-        .x(d =>  {
-            return xScale(d.date);
-        })
-        .y(d => {
-            return yScale(d.precip)
-        })
+
+  let barArea = container.append("g");
+
+  let bars = barArea.selectAll(".bar").data(precipitationDatastore);
+  const tooltip = d3
+    .select("body")
+    .append("div")
+    .attr("class", "toolTip")
+    .style("opacity", 0);
+
+  bars
+    .enter()
+    .append("rect")
+    .attr(
+      "height",
+      d =>
+        config.dimensions.height -
+        config.dimensions.margin.bottom -
+        config.dimensions.margin.top -
+        yScale(d.precip)
     )
-    .attr("stroke", "blue")
-    .style("transform",
-    `translate(${config.dimensions.margin.left}px, ${config.dimensions.margin.top}px)`)
-    .attr("stroke-width", 2)
-    .attr("fill", "none");
+    .attr("y", d => yScale(d.precip))
+    .attr("x", d => xScale(d.date))
+    .attr("width", xScale.bandwidth())
+    .style(
+      "transform",
+      `translate(${config.dimensions.margin.left}px, ${config.dimensions.margin.top}px)`
+    )
+    .attr("fill", "#1F9EB5")
+    .on("mouseover", d => {
+      tooltip
+        .transition()
+        .duration(200)
+        .style("opacity", 0.9);
+      let dateTime = d3.timeFormat("%b-%d")(d.date);
+      tooltip
+        .style("left", d3.event.pageX - 50 + "px")
+        .style("top", d3.event.pageY - 70 + "px")
+        .html(`${dateTime}-2018<br>Precipitation: ${d.precip}`);
+    })
+    .on("mouseout", d => {
+      tooltip
+      .transition()
+      .duration(500)
+      .style("opacity", 0);
+    });
 }
 
 function preprocessData() {
@@ -120,5 +179,7 @@ function renderPrecipitationData() {
   const config = getPrecipationChartConfig();
   const scales = getPrecipitationChartScales(config);
   drawAxes(config, scales);
-  drawLine(config, scales);
+  // drawLine(config, scales);
+  drawBar(config, scales);
+  addAxisLabels(config);
 }
