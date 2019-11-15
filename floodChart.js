@@ -54,7 +54,7 @@ const addLegend = floodMap => {
       grades = [0, 10, 20, 50, 100, 200],
       colors = ['#f1eef6','#d0d1e6','#a6bddb','#74a9cf','#2b8cbe','#045a8d'];
     // loop through our density intervals and generate a label with a colored square for each interval
-    debugger;
+    
     // const wrapped_div = $(div).append($("div"));
     for (let i = 0; i < grades.length; i++) {
       div.innerHTML +=

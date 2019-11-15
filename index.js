@@ -15,5 +15,6 @@ async function loadData() {
         renderPrecipitationData();
         renderHospitalChart();
         renderFloodMap();
+        renderImpactChart();
     })
 })()

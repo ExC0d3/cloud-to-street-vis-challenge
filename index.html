@@ -26,6 +26,7 @@
     <script src="precipitationChart.js"></script>
     <script src="hospitalChart.js"></script>
     <script src="floodChart.js"></script>
+    <script src="impactChart.js"></script>
 
     <link rel="stylesheet" href="style.css" />
 
@@ -46,7 +47,9 @@
     <div class="container">
       <div class="row">
         <div class="col-12">
-          <h3 class="p-2">Precipitation in Sri Lanka from May 2018 - June 2018</h3>
+          <h3 class="p-2">
+            Precipitation in Sri Lanka from May 2018 - June 2018
+          </h3>
         </div>
         <div class="col-12">
           <div>
@@ -55,9 +58,9 @@
         </div>
       </div>
       <div class="row mt-5">
-          <div class="col-12">
-              <h3 class="p-2">Hospital locations in Sri Lanka</h3>
-            </div>
+        <div class="col-12">
+          <h3 class="p-2">Hospital locations in Sri Lanka</h3>
+        </div>
         <div class="col-12 mb-2">
           <div>
             <div class="input-group">
@@ -75,17 +78,34 @@
           </div>
         </div>
         <div class="col-12">
-          <div id="hospitalMap"></div>
-        </div>
+            <div id="hospitalMap"></div>
+          </div>
       </div>
+      
       <div class="row mt-5">
-          <div class="col-12">
-              <h3 class="p-2">Flood map</h3>
-            </div>
         <div class="col-12">
-          <div id="floodMap"></div>
+          <h3 class="p-2">Flood map</h3>
         </div>
+        
       </div>
+      <div class="row">
+          <div class="col-4">
+            <table id="impactTable">
+              <thead>
+                <tr>
+                  <th>Population Exposed</th>
+                  <th>Area exposed</th>
+                </tr>
+              </thead>
+              <tbody>
+              </tbody>
+            </table>
+          </div>
+          <div class="col-8">
+              <div id="floodMap"></div>
+            </div>
+          
+        </div>
     </div>
   </body>
   <script src="index.js"></script>
