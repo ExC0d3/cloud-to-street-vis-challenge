@@ -1,0 +1,71 @@
+<html>
+<head>
+  <title>SentinelCombo_20180516_20180612</title>
+  <style type="text/css">
+    main {
+       font-family: Helvetica, Arial, sans-serif;
+       font-size: 20pt;
+       text-align: center;
+       margin: 2em auto 2em auto;
+    }
+
+    #link-container {
+       width: 340px;
+       margin: 2em auto 2em auto;
+    }
+
+    a.button {
+       color: #fff;
+       text-decoration: none;
+       background-color: #3367d6;
+       padding: 1em;
+       display: inline;
+    }
+
+    #kml-link {
+       display: none;
+    }
+
+    .mobile #kml-link {
+       display: inline;
+    }
+
+    .mobile #deep-link {
+       display: none;
+    }
+  </style>
+</head>
+<body>
+  <script type="text/javascript">
+    window.onload = function() {
+      var userAgent = '';
+      if (window.navigator) {
+        if (window.navigator.userAgent) {
+            userAgent = window.navigator.userAgent;
+        }
+      }
+      var matchUserAgent = function(str) {
+        return userAgent.indexOf(str) != -1;
+      }
+      var isTablet = matchUserAgent('iPad') ||
+          (matchUserAgent('Android') &&
+          !matchUserAgent('Mobile')) ||
+          matchUserAgent('Silk');
+      var isMobile = matchUserAgent('iPod') ||
+          matchUserAgent('iPhone') ||
+          matchUserAgent('Android') ||
+          matchUserAgent('IEMobile');
+      if (isTablet || isMobile) {
+        document.body.classList.add('mobile');
+      }
+    }
+  </script>
+  <main>
+    <div>SentinelCombo_20180516_20180612</div>
+    <div id="link-container">
+      <a id="deep-link" class="button" href="https://earth.google.com/web/?kml=https://earth-kml.appspot.com/?link%3Dhttps://console.developers.google.com/m/cloudstorage/b/sri-lanka-hist-maptiles/o/SentinelCombo_20180516_20180612/$%255Blevel%255D/$%255Bx%255D/$%255By%255D.png%26icon%3Dhttps://storage.googleapis.com/earth-kml.appspot.com/no_icon.png%26name%3DSentinelCombo_20180516_20180612%26north%3D10.0%26south%3D5.0%26east%3D82.0%26west%3D79.0%26minLevel%3D0%26maxLevel%3D14">Open in Google Earth</a>
+      <a id="kml-link" class="button" href="https://earth-kml.appspot.com/?link=https://console.developers.google.com/m/cloudstorage/b/sri-lanka-hist-maptiles/o/SentinelCombo_20180516_20180612/$%5Blevel%5D/$%5Bx%5D/$%5By%5D.png&amp;icon=https://storage.googleapis.com/earth-kml.appspot.com/no_icon.png&amp;name=SentinelCombo_20180516_20180612&amp;north=10.0&amp;south=5.0&amp;east=82.0&amp;west=79.0&amp;minLevel=0&amp;maxLevel=14">Open in Google Earth</a>
+    </div>
+  </main>
+</body>
+</html>
