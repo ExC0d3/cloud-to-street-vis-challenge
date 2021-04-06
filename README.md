@@ -1,6 +1,6 @@
 # cloud-to-street-vis-challenge
 
-Test 1
+Test 2
 
 # Running locally
 - Install Node.js - https://nodejs.org/en/download/
